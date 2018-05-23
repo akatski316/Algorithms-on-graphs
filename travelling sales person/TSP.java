@@ -67,7 +67,7 @@ class TSP
 				return new TSP(weight[0][all.get(i)]+backsum, all.get(i), null);
 			}		
 		}
-		int k = 0;
+		int k = 0;        
 		for(int i = 0;(i < all.size());i++)
 		{
 			if(!restrictedset.contains(all.get(i)))
