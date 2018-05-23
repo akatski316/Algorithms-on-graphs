@@ -2,9 +2,9 @@ import java.util.*;
 
 class TSP
 {
-	int cost;
-	int valueofprevvertex;
-	TSP prevvertex;
+	int cost;                       //..current cost
+	int valueofprevvertex;          //..what was previous vertex
+	TSP prevvertex;                 //..a reference to this vertex to keep track
 
 	TSP(int a,int b, TSP c)
 	{
@@ -29,7 +29,7 @@ class TSP
 		for(int i=0;i<n;i++)
 		{
 			if(i != 0)
-				all.add(i);
+				all.add(i); 	//..all vertices other than starting vetex i.e 0
 			for(int j=0;j<n;j++)
 			{
 				if(i!=j)
@@ -42,23 +42,25 @@ class TSP
 
 		System.out.println();
 		System.out.println("Starting node assumed to be node 1.");
-		List<Integer> restrictedset = new ArrayList<Integer>();
+		List<Integer> restrictedset = new ArrayList<Integer>();  //..we keep on removing vertices to reduce problem
+								//..those vertices are send in this list
 		
 		System.out.println(getMinCost(restrictedset,all,0,0).cost);
 	}
-
+	/* this method returns a TSP object that contains minimum possible cost
+	*/
 	public static TSP getMinCost(List<Integer> restrictedset,List<Integer> all,int prevvertex,int backsum)
 	{
 		restrictedset.add(prevvertex);
-		List<TSP> temp = new ArrayList<TSP>();
+		List<TSP> temp = new ArrayList<TSP>();   //..temp is a list tsp object that contains
 		int index = 0;
 		int min = 999999;
 
 		if(restrictedset.size() > 1)
 			backsum = backsum + weight[prevvertex][restrictedset.get(restrictedset.size()-2)];
 		
-		for(int i = 0;(i < all.size() && restrictedset.size() > all.size());i++)
-		{
+		for(int i = 0;(i < all.size() && restrictedset.size() > all.size());i++)  //gets executed only if all vertices are  
+		{								//..added to restricted set
 			if(restrictedset.get(restrictedset.size() - 1) == all.get(i))
 			{
 				restrictedset.remove(restrictedset.size() - 1);
